@@ -5,22 +5,18 @@
   "dependencies": {
     "axios": "^0.26.0",
     "firebase": "^9.6.1",
-    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.4.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^8.2.0",
-    "tw-elements": "^1.0.0-beta1"
+    "tw-elements": "^1.0.0-alpha12"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +37,8 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.2.7"
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.2"
   }
 }

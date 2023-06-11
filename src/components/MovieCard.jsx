@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContextProvider";
+import { toastWarnNotify } from "../helpers/ToastNotify";
+
 const IMG_API = "https://image.tmdb.org/t/p/w1280";
 const defaultImage =
   "https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
 
-const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
+const MovieCard = ({ poster_path, title, overview, vote_average, id }) => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const getVoteClass = (vote) => {
     if (vote >= 8) {
       return "green";
@@ -17,12 +20,13 @@ const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
       return "red";
     }
   };
-
   return (
     <div
       className="movie"
-      id="container"
-      onClick={() => navigate("/details/" + id)}
+      onClick={() => {
+        navigate("details/" + id);
+        !currentUser && toastWarnNotify("please log in to see details");
+      }}
     >
       <img
         loading="lazy"
@@ -32,7 +36,7 @@ const MovieCard = ({ title, poster_path, overview, vote_average, id }) => {
       <div className="flex align-baseline justify-between p-1 text-white">
         <h5>{title}</h5>
         {currentUser && (
-          <span className={`tag ${getVoteClass(vote_average)} `}>
+          <span className={`tag ${getVoteClass(vote_average)}`}>
             {vote_average.toFixed(1)}
           </span>
         )}
